@@ -4,6 +4,24 @@ export default function SignUp({ setIsSignUp }) {
             <h1 className="text-5xl font-semibold"> Create Account</h1>
             <p className="font-medium text-lg text-gray-500 mt-4">Please fill in the details to create an account.</p>
             <div className="mt-8">
+                <table className="table-auto">
+                    <thead>
+                        <tr className="flex text-start">
+                            <th className="w-1/2 text-lg font-medium text-start">Name</th>
+                            <th className="w-1/2 text-lg font-medium text-start">Surname</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr className="flex">
+                            <td className="w-1/2">
+                                <input className="w-full border-2 border-gray-200 rounded-xl p-4 mt-1 bg-transparent" placeholder="Ivan"></input>
+                            </td>
+                            <td className="w-1/2">
+                                <input className="w-full border-2 border-gray-200 rounded-xl p-4 mt-1 bg-transparent" placeholder="Ivanov"></input>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
                 <div>
                     <label className="text-lg font-medium">Username</label>
                     <input className="w-full border-2 border-gray-200 rounded-xl p-4 mt-1 bg-transparent" placeholder="getafixUser"></input>

@@ -9,7 +9,7 @@ function Login() {
 
   return (
     <div className="flex w-full h-screen overflow-hidden">
-      <div className={`w-full flex items-center justify-center lg:w-1/2 lg:transition-transform lg:duration-500 ${isSignUp ? 'lg:translate-x-full' : ''}`}>
+      <div className={`w-full flex items-center justify-center lg:w-1/2 ${isSignUp ? 'lg:translate-x-full' : ''}`}>
         {isSignUp ? <SignUp setIsSignUp={setIsSignUp} /> : <SignIn setIsSignUp={setIsSignUp} />}
       </div>
       <div id="sphere" className={`hidden relative lg:flex h-full w-1/2 items-center justify-center bg-gray-200 lg:transition-transform lg:duration-500 ${isSignUp ? 'lg:-translate-x-full' : ''}`}>
