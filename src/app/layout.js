@@ -9,9 +9,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className="">
         <Navbar />
-        <main className="mt-14 sm:ml-16">{children}</main>
+        <main className="mt-14 sm:ml-16 flex">{children}</main>
       </body>
     </html>
   );

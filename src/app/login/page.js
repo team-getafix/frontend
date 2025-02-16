@@ -8,7 +8,7 @@ function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
 
   return (
-    <div className="flex w-full h-screen overflow-hidden">
+    <div className="flex w-full h-[calc(100vh-64px)]">
       <div className={`w-full flex items-center justify-center lg:w-1/2 ${isSignUp ? 'lg:translate-x-full' : ''}`}>
         {isSignUp ? <SignUp setIsSignUp={setIsSignUp} /> : <SignIn setIsSignUp={setIsSignUp} />}
       </div>
