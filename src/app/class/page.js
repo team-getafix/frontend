@@ -1,12 +1,7 @@
-import PeopleTab from "@/components/PeopleTab"
+import Stream from "@/components/Stream"
 
-function People() {
-    return (
-        <div className="flex items-center justify-center w-screen mt-10">
-            <PeopleTab/>
-        </div>
-        
-    )
+function StreamPage() {
+    return <Stream classId="example-class" userId="u1" isTeacher={true} />;
 }
 
-export default People;
+export default StreamPage;
