@@ -2,9 +2,10 @@ import PeopleTab from "@/components/PeopleTab"
 
 function People() {
     return (
-        <div className="flex items-center justify-center h-screen w-screen">
+        <div className="flex items-center justify-center w-screen mt-10">
             <PeopleTab/>
         </div>
+        
     )
 }
 
