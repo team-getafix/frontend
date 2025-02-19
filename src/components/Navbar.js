@@ -49,7 +49,7 @@ export default function Navbar() {
         <ul className="flex flex-col space-y-4 p-4">
           {[
             { href: "/", label: "Home", icon: <RiHome4Line className="text-2xl z-50" /> },
-            { href: "/about", label: "Subjects", icon: <RiBook2Line className="text-2xl z-50" /> },
+            { href: "/class", label: "Subjects", icon: <RiBook2Line className="text-2xl z-50" /> },
             { href: "/services", label: "Settings", icon: <RiSettings3Line className="text-2xl z-50" /> },
           ].map(({ href, label, icon }) => (
             <li key={href} className="overflow-hidden whitespace-nowrap">
