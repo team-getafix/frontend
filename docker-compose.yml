@@ -44,12 +44,27 @@ services:
 
   api-gateway:
     container_name: api-gateway
-    image: glomdom/api-gateway:latest
+    build: ./api-gateway/
     ports:
       - "4000:4000"
     depends_on:
       - auth-service
       - class-service
+      - submission-service
+    stop_signal: SIGTERM
+    stop_grace_period: 1s
+
+  submission-service:
+    container_name: submission-service
+    image: glomdom/submission-service:latest
+    ports:
+      - "4003:4003"
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_URL=postgresql://admin:compsci@postgres:5432/notatedb?schema=class
+    stop_signal: SIGTERM
+    stop_grace_period: 1s
 
 volumes:
   postgres_data:
