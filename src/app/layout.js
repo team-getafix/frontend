@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="">
         <Navbar />
-        <main className="mt-14 sm:ml-16 flex">{children}</main>
+        <main className="mt-14 sm:ml-20 flex">{children}</main>
       </body>
     </html>
   );

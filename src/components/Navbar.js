@@ -1,10 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { RiMenuLine, RiCloseLargeLine, RiAccountCircleFill, RiHome4Line, RiBook2Line, RiSettings3Line } from "react-icons/ri";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname(); // Get current route
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -43,19 +45,21 @@ export default function Navbar() {
       {/* Sidebar Menu */}
       <div
         className={`sidebar-menu fixed top-14 left-0 h-full bg-white shadow-xl transform transition-all duration-150 ${
-          isOpen ? "w-40" : "sm:w-16 w-0 sm:hover:w-40"
+          isOpen ? "w-40" : "sm:w-20 w-0 sm:hover:w-40"
         } sm:top-16`}
       >
-        <ul className="flex flex-col space-y-4 p-4">
+        <ul className="flex flex-col space-y-4 p-6">
           {[
-            { href: "/", label: "Home", icon: <RiHome4Line className="text-2xl z-50" /> },
-            { href: "/class", label: "Subjects", icon: <RiBook2Line className="text-2xl z-50" /> },
-            { href: "/services", label: "Settings", icon: <RiSettings3Line className="text-2xl z-50" /> },
-          ].map(({ href, label, icon }) => (
+            { href: "/", label: "Home", icon: RiHome4Line },
+            { href: "/class", label: "Subjects", icon: RiBook2Line },
+            { href: "/services", label: "Settings", icon: RiSettings3Line },
+          ].map(({ href, label, icon: Icon }) => (
             <li key={href} className="overflow-hidden whitespace-nowrap">
               <div>
-                <Link href={href} className="hover:text-orange-500 flex items-center" onClick={() => setIsOpen(true)}>
-                  <span className="block mr-2">{icon}</span>
+                <Link href={href} className={`hover:scale-105 duration-200  flex items-center ${pathname === href ? "text-orange-500" : "text-gray-700"}`} onClick={() => setIsOpen(true)}>
+                  <span className={`block mr-2`}>
+                    <Icon className="text-2xl z-50" />
+                  </span>
                   <span className={`block bg-transparent overflow-hidden`}>{label}</span>
                 </Link>
               </div>

@@ -1,6 +1,29 @@
 "use client";
 
+import React, { useState } from 'react';
+import CourseJoin from "@/components/CourseJoin";
+import CourseCreate from "@/components/CourseCreate";
+
 function App() {
+  const [showCourseJoin, setShowCourseJoin] = useState(false);
+  const [showCourseCreate, setShowCourseCreate] = useState(false);
+
+  const handleJoinCourseClick = () => {
+    setShowCourseJoin(true);
+  };
+
+  const handleCloseCourseJoin = () => {
+    setShowCourseJoin(false);
+  };
+
+  const handleCreateCourseClick = () => {
+    setShowCourseCreate(true);
+  };
+
+  const handleCloseCourseCreate = () => {
+    setShowCourseCreate(false);
+  };
+
   return (
     <div className="m-10 w-full">
       <div className="flex flex-col items-end justify-end">
@@ -10,10 +33,12 @@ function App() {
       <div className="flex flex-col text-center items-center justify-center h-full m-5 font-semibold">
         <h1>Add a course to get started</h1>
         <div className="justify-between sm:space-x-4 mt-2">
-          <button className="text-blue-500 rounded p-2 hover:bg-slate-300 duration-300">Create a course</button>
-          <button className="bg-blue-500 rounded p-2 text-white hover:bg-blue-700 hover:shadow-lg duration-300">Join a course</button>
+          <button className="text-orange-500 rounded p-2 hover:bg-slate-200 duration-300" onClick={handleCreateCourseClick}>Create a course</button>
+          <button className="bg-orange-500 rounded p-2 text-white hover:bg-orange-600 hover:shadow-lg duration-300" onClick={handleJoinCourseClick}>Join a course</button>
         </div>
       </div>
+      {showCourseJoin && <CourseJoin close={handleCloseCourseJoin} />}
+      {showCourseCreate && <CourseCreate close={handleCloseCourseCreate} />}
     </div>
   );
 }
