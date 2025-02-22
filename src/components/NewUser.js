@@ -1,7 +1,9 @@
 import { capitalize } from "@/utils/stringUtils";
 import { useState } from "react";
+import { Alert } from "@/components/Alert";
 
 export default function NewUser() {
+    const [customAlert, setAlert] = useState({ visible: false, type: "", message: "" });
 
     function createUser(formData) {
         localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDAyMjYxNjYsImV4cCI6MTc0MDIyOTc2Nn0.VaJ3_h4GKDIxpKzA65bMhJsAPxoBa9ZuCZCXd2g_hcI');
@@ -26,12 +28,27 @@ export default function NewUser() {
             }),
         }).then(response => {
             if (response.ok) {
-                alert(`${capitalize(formData.get('role'))} ${formData.get('firstName')} ${formData.get('lastName')} created successfully`);
+                setAlert({
+                    visible: true,
+                    type: "success",
+                    message: `${capitalize(role)} ${firstName} ${lastName} created successfully`,
+                });
+                // alert(`${capitalize(formData.get('role'))} ${formData.get('firstName')} ${formData.get('lastName')} created successfully`);
             } else if (response.status == 409) {
-                alert(`User with email "${formData.get('email')}" already exists`);
+                setAlert({
+                    visible: true,
+                    type: "error",
+                    message: `User with email "${email}" already exists`,
+                });
+                // alert(`User with email "${formData.get('email')}" already exists`);
             } else {
-                console.error(`${response}`);
-                alert(`${response.status}: ${response.statusText}`);
+                // console.error(`${response}`);
+                // alert(`${response.status}: ${response.statusText}`);
+                setAlert({
+                    visible: true,
+                    type: "error",
+                    message: `${response.status}: ${response.statusText}`,
+                });
             }
         }).catch(error => {
             console.error(error);
@@ -41,6 +58,13 @@ export default function NewUser() {
 
     return (    
         <>
+            {customAlert.visible && (
+                <Alert
+                type={customAlert.type}
+                message={customAlert.message}
+                onClose={() => setAlert({ visible: false, type: "", message: "" })}
+                />
+            )}
             <div className="flex items-center justify-center w-screen h-screen" suppressHydrationWarning>
                 <form action={createUser}>
                     <div className="mb-4">
