@@ -1,3 +1,5 @@
+"use client"
+
 import { capitalize } from "@/utils/stringUtils";
 import { useState } from "react";
 import { Alert } from "@/components/Alert";
