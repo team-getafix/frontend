@@ -1,4 +1,4 @@
-"use client"
+"use client" // TODO: remove this
 
 import { capitalize } from "@/utils/stringUtils";
 import { useState } from "react";
@@ -61,11 +61,7 @@ export default function NewUser() {
     return (    
         <>
             {customAlert.visible && (
-                <Alert
-                type={customAlert.type}
-                message={customAlert.message}
-                onClose={() => setAlert({ visible: false, type: "", message: "" })}
-                />
+                <Alert type={customAlert.type} message={customAlert.message} onClose={() => setAlert({ visible: false, type: "", message: "" })}/>
             )}
             <div className="flex items-center justify-center w-screen h-screen" suppressHydrationWarning>
                 <form action={createUser}>
