@@ -20,7 +20,9 @@ export default function SignIn({ setIsSignUp }) {
 
             if (response.ok) {
                 const data = await response.json();
-                const decodedToken = jwtDecode(data.token);
+                const token = data.token;
+                localStorage.setItem('token', token);
+                const decodedToken = jwtDecode(token);
                 if (decodedToken.role === "admin") {
                     console.log("Logged in as admin");
                 } else if (decodedToken.role === "user") {
