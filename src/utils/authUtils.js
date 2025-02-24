@@ -1,8 +1,14 @@
 import { jwtDecode } from "jwt-decode";
+import { useEffect } from "react";
 
 export function isAdmin() {
-    const token = localStorage.getItem('token');
+    const [token, setToken] = useState(null);
 
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        setToken(token);
+    }, [])
+    
     const decodedToken = jwtDecode(token);
 
     const currentTime = Date.now() / 1000;
