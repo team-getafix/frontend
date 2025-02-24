@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Stream from "@components/Stream";
-import PeopleTab from "@components/PeopleTab";
+import Stream from "@/components/Stream";
+import PeopleTab from "@/components/PeopleTab";
 
 export default function ClassPage({ classId, userId, isTeacher }) {
   const [activeTab, setActiveTab] = useState("stream");
