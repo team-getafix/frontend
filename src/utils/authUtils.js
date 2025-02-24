@@ -2,10 +2,21 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 
 export function isAdmin() {
-    
+    return isRole('admin');
+}
+
+export function isStudent() {
+    return isRole('student');
+}
+
+export function isTeacher() {
+    return isRole('teacher');
+}
+
+function isRole(role) {
     const decodedToken = decodeToken();
 
-    if (decodedToken.role === 'admin' && !isTokenExpired()) {
+    if (decodedToken.role === role && !isTokenExpired()) {
         return true;
     }
 
