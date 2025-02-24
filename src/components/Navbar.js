@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { RiMenuLine, RiCloseLargeLine, RiAccountCircleFill, RiHome4Line, RiBook2Line, RiSettings3Line } from "react-icons/ri";
+import { isAdmin } from "@/utils/authUtils";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +12,13 @@ export default function Navbar() {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const menuItems = [
+    { href: "/", label: "Home", icon: RiHome4Line },
+    ...(isAdmin() ? [{ href: "/admin", label: "Admin", icon: RiHome4Line }] : []),
+    { href: "/class", label: "Subjects", icon: RiBook2Line },
+    { href: "/services", label: "Settings", icon: RiSettings3Line },
+  ];
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -49,11 +57,7 @@ export default function Navbar() {
         } sm:top-16`}
       >
         <ul className="flex flex-col space-y-4 p-6">
-          {[
-            { href: "/", label: "Home", icon: RiHome4Line },
-            { href: "/class", label: "Subjects", icon: RiBook2Line },
-            { href: "/services", label: "Settings", icon: RiSettings3Line },
-          ].map(({ href, label, icon: Icon }) => (
+          {menuItems.map(({ href, label, icon: Icon }) => (
             <li key={href} className="overflow-hidden whitespace-nowrap">
               <div>
                 <Link href={href} className={`hover:scale-105 duration-200  flex items-center ${pathname === href ? "text-orange-500" : "text-gray-700"}`} onClick={() => setIsOpen(true)}>
