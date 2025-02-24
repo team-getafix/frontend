@@ -1,5 +1,4 @@
 import { jwtDecode } from "jwt-decode";
-import { useEffect, useState } from "react";
 
 export function isAdmin() {
     return isRole('admin');
