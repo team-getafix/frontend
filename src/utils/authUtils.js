@@ -15,21 +15,34 @@ export function isTeacher() {
 function isRole(role) {
     const decodedToken = decodeToken();
 
-    if (decodedToken.role === role && !isTokenExpired()) {
+    if (decodedToken && decodedToken.role === role && !isTokenValid()) {
         return true;
     }
 
     return false;
 }
 
+export function isTokenValid() {
+    return !isTokenEmpty() && !isTokenExpired() 
+}
+
 export function isTokenExpired() {
     const decodedToken = decodeToken();
     const currentTime = Date.now() / 1000;
 
-    return decodedToken.exp < currentTime
+    return decodedToken && decodedToken.exp < currentTime
 }
 
 function decodeToken() {
-    const token = localStorage.getItem('token');
-    return jwtDecode(token);
+    if (!isTokenEmpty()) {
+        const token = localStorage.getItem('token');
+        return jwtDecode(token);
+    }
+}
+
+function isTokenEmpty() {
+
+    if (!localStorage.getItem('token')) {
+        return true;
+    }
 }

@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { RiMenuLine, RiCloseLargeLine, RiAccountCircleFill, RiHome4Line, RiBook2Line, RiSettings3Line } from "react-icons/ri";
-import { isAdmin } from "@/utils/authUtils";
+import { isAdmin, isTokenValid } from "@/utils/authUtils";
 
 export default function Navbar() {
+  var profileLink = "/login";
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname(); // Get current route
 
@@ -18,6 +19,11 @@ export default function Navbar() {
     ...(isAdmin() ? [{ href: "/admin", label: "Admin", icon: RiHome4Line }] : [{ href: "/class", label: "Subjects", icon: RiHome4Line }]),
     { href: "/services", label: "Settings", icon: RiSettings3Line },
   ];
+
+
+  if (isTokenValid()) {
+    profileLink = "/profile"
+  }
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -44,7 +50,7 @@ export default function Navbar() {
       </div>
 
       <div className="scale-[200%] duration-300 mr-4">
-        <Link href="/login">
+        <Link href={ profileLink }>
           <RiAccountCircleFill />
         </Link>
       </div>
