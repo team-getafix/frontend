@@ -16,6 +16,9 @@ docker-compose pull
 docker-compose up --build -d
 ```
 
+## TODO
+* One base component for forms
+* Alerts for sign in
 
 ## Learn More
 

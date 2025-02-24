@@ -8,8 +8,6 @@ export default function NewUser() {
     const [customAlert, setAlert] = useState({ visible: false, type: "", message: "" });
 
     function createUser(formData) {
-        localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDAyMjYxNjYsImV4cCI6MTc0MDIyOTc2Nn0.VaJ3_h4GKDIxpKzA65bMhJsAPxoBa9ZuCZCXd2g_hcI');
-
         const email = formData.get('email');
         const firstName = formData.get('firstName');
         const lastName = formData.get('lastName');
