@@ -2,16 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import MultipleSelect from "@/components/MultipleSelect"
-import { jwtDecode } from "jwt-decode";
 
 export default function NewClass() {
-    const token = localStorage.getItem('token')
-    const decodedToken = jwtDecode(token);
-
-    if (decodedToken.role != 'admin') {
-        console.log(decodedToken.role); // TODO: return 401 unauthorized component
-    }   
-
     const [subjects, setSubjects] = useState([]);
     const [students, setStudents] = useState([]);
     const [selectedSubjects, setSelectedSubjects] = useState([]);

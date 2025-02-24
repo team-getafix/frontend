@@ -19,7 +19,7 @@ export function Alert({ type, message, onClose }) {
   return (
     <div className="fixed flex justify-center w-screen items-center">
         <div className={`flex items-center p-4 ${alertStyles[type]} font-bold text-white rounded w-1/4 shadow mt-10 duration-100`}>
-        <svg class="fill-current w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d={alertIcons[type]}></path></svg>
+        <svg className="fill-current w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d={alertIcons[type]}></path></svg>
             <p>{message}</p>
         </div>
         

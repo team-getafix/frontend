@@ -1,4 +1,4 @@
-"use client" // TODO: remove this
+"use client"
 
 import { capitalize } from "@/utils/stringUtils";
 import { useState } from "react";
@@ -51,8 +51,11 @@ export default function NewUser() {
                 });
             }
         }).catch(error => {
-            console.error(error);
-            alert(error);
+            setAlert({
+                visible: true,
+                type: "error",
+                message: `${error}`,
+            });
         });
     }
 
