@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import { Alert } from "@/components/Alert";
 
 export default function SignIn({ setIsSignUp }) {
+    const [customAlert, setAlert] = useState({ visible: false, type: "", message: "" });
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -30,17 +32,30 @@ export default function SignIn({ setIsSignUp }) {
                 } else {
                     console.log("Logged in with unknown role");
                 }
+                setAlert({
+                    visible: true,
+                    type: "success",
+                    message: `Signed in successfully.`,
+                });
             } else {
-                console.error("Login failed");
+                setAlert({
+                    visible: true,
+                    type: "error",
+                    message: `${response.status} ${response.statusText}.`,
+                });
             }
         } catch (error) {
-            console.error("Error:", error);
+            setAlert({
+                visible: true,
+                type: "error",
+                message: `${error}.`,
+            });
         }
     };
 
     return (
         <div className="lg:bg-white duration-300 px-10 py-10 rounded-2xl lg:border-2 border-gray-200">
-            <h1 className="text-5xl font-semibold"> Welcome Back!</h1>
+            <h1 className="text-5xl font-semibold">Welcome Back!</h1>
             <p className="font-medium text-lg text-gray-500 mt-4">Please enter your details.</p>
             <form onSubmit={handleLogin} className="mt-8">
                 <div>

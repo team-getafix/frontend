@@ -15,7 +15,7 @@ export function isTeacher() {
 function isRole(role) {
     const decodedToken = decodeToken();
 
-    if (decodedToken && decodedToken.role === role && !isTokenValid()) {
+    if (decodedToken && decodedToken.role === role && isTokenValid()) {
         return true;
     }
 
