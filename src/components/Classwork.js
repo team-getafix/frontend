@@ -17,7 +17,6 @@ export default function Classwork() {
               dueDate: "No due date",
               submitted: false,
               description: "Разглеждане на принципите на ООП.",
-              files: ["https://example.com/oop.pdf"],
             },
             {
               id: 2,
@@ -25,7 +24,6 @@ export default function Classwork() {
               dueDate: "Due Mar 10, 11:59 PM",
               submitted: false,
               description: "Решаване на задачи с дървета и графи.",
-              files: [],
             },
             {
               id: 3,
@@ -33,7 +31,6 @@ export default function Classwork() {
               dueDate: "Due Mar 15, 5:00 PM",
               submitted: false,
               description: "Работа с релационни бази данни.",
-              files: ["https://example.com/sql-cheatsheet.pdf", "https://example.com/normalization.png"],
             },
           ];
         
