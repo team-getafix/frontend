@@ -1,7 +1,7 @@
 export default function PeopleTab() {
     return (
-        <div className="w-2/3">
-            <table className="table-auto ml-10 mr-10 w-full h-full">
+        <div className="w-full mx-10">
+            <table className="table-auto w-full h-full">
                 <thead>
                     <tr>
                         <th colSpan="3" className="text-left text-3xl">Teachers</th>

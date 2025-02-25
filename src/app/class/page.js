@@ -3,41 +3,48 @@
 import { useState } from "react";
 import Stream from "@/components/Stream";
 import PeopleTab from "@/components/PeopleTab";
+import Classwork from "@/components/Classwork";
 
 export default function ClassPage({ classId, userId, isTeacher }) {
   const [activeTab, setActiveTab] = useState("stream");
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen w-full">
       {/* Top Navigation */}
-      <nav className="bg-gray-100 p-4 flex space-x-4 border-b w-full">
+      <nav className="bg-gray-100 p-2 m-2 flex space-x-4 border-b">
         <button
-          className={`px-4 py-2 rounded-lg font-medium transition ${{
-            stream: "bg-blue-500 text-white",
-            people: "hover:bg-gray-200",
-          }[activeTab]}`}
+          className={`px-4 py-2 rounded-lg font-medium transition ${
+            activeTab === "stream" ? "text-orange-500" : "hover:bg-gray-200"
+          }`}
           onClick={() => setActiveTab("stream")}
         >
           Stream
         </button>
         <button
-          className={`px-4 py-2 rounded-lg font-medium transition ${{
-            people: "bg-blue-500 text-white",
-            stream: "hover:bg-gray-200",
-          }[activeTab]}`}
+          className={`px-4 py-2 rounded-lg font-medium transition ${
+            activeTab === "people" ? "text-orange-500" : "hover:bg-gray-200"
+          }`}
           onClick={() => setActiveTab("people")}
         >
           People
         </button>
+        <button
+          className={`px-4 py-2 rounded-lg font-medium transition ${
+            activeTab === "classwork" ? "text-orange-500" : "hover:bg-gray-200"
+          }`}
+          onClick={() => setActiveTab("classwork")}
+        >
+          Classwork
+        </button>
       </nav>
 
       {/* Main Content */}
-      <main className="flex-1 p-6 overflow-auto">
-        {activeTab === "stream" ? (
+      <main className="flex p-6 justify-center overflow-auto">
+        {activeTab === "stream" && (
           <Stream classId={classId} userId={userId} isTeacher={isTeacher} />
-        ) : (
-          <PeopleTab />
         )}
+        {activeTab === "people" && <PeopleTab />}
+        {activeTab === "classwork" && <Classwork />}
       </main>
     </div>
   );
