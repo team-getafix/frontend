@@ -15,7 +15,8 @@ export default function PeopleTab() {
                 <tbody className="text-lg">
                     <tr>
                         <td className="px-6 py-2">
-                            Picture
+                        <img src="/teacher.svg" alt="Teacher Icon" className="w-8 h-8" />
+
                         </td>
                         <td className="px-6 py-2">
                             First Name

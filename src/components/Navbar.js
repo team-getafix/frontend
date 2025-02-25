@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { RiMenuLine, RiCloseLargeLine, RiAccountCircleFill, RiHome4Line, RiBook2Line, RiSettings3Line } from "react-icons/ri";
 import { isAdmin, isTokenValid } from "@/utils/authUtils";
+import { HiOutlineBookOpen } from "react-icons/hi";
 
 export default function Navbar() {
   var profileLink = "/login";
@@ -16,7 +17,7 @@ export default function Navbar() {
 
   const menuItems = [
     { href: "/", label: "Home", icon: RiHome4Line },
-    ...(isAdmin() ? [{ href: "/admin", label: "Admin", icon: RiHome4Line }] : [{ href: "/class", label: "Subjects", icon: RiHome4Line }]),
+    ...(isAdmin() ? [{ href: "/admin", label: "Admin", icon: RiHome4Line }] : [{ href: "/class", label: "Subjects", icon: HiOutlineBookOpen }]),
     { href: "/services", label: "Settings", icon: RiSettings3Line },
   ];
 
