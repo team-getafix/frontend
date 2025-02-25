@@ -2,51 +2,57 @@
 
 import { Alert } from "@/components/Alert";
 import { useState } from "react";
+import { capitalize } from "@/utils/stringUtils";
 
 export default function ChangePasswordView() {
     const [customAlert, setAlert] = useState({ visible: false, type: "", message: "" });
 
-    function changePassword(formData) {
+    async function changePassword(formData) {
         const oldPassword = formData.get('oldPassword');
         const newPassword = formData.get('newPassword');
         const confirmNewPassword = formData.get('confirmNewPassword');
-
-        console.log(oldPassword)
-        console.log(newPassword)
-        console.log(confirmNewPassword)
-
-        fetch('http://localhost:4000/api/auth/change-password', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    },
-                    body: JSON.stringify({
-                        oldPassword: oldPassword,
-                        newPassword: newPassword,
-                        confirmNewPassword: confirmNewPassword,
-                    }),
-                }).then(response => {
-                    if (response.ok) {
-                        setAlert({
-                            visible: true,
-                            type: "success",
-                            message: `Password changed successfully`,
-                        });
-                    } else {
-                        setAlert({
-                            visible: true,
-                            type: "error",
-                            message: `${response.status}: ${response.statusText}`,
-                        });
-                    }
-                }).catch(error => {
-                    setAlert({
-                        visible: true,
-                        type: "error",
-                        message: `Error: ${error}`,
-                    });
+    
+        console.log(oldPassword);
+        console.log(newPassword);
+        console.log(confirmNewPassword);
+    
+        try {
+            const response = await fetch('http://localhost:4000/api/auth/change-password', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'application/json', // Add this header
+                },
+                body: JSON.stringify({
+                    oldPassword: oldPassword,
+                    newPassword: newPassword,
+                    confirmNewPassword: confirmNewPassword,
+                }),
+            });
+    
+            const responseData = await response.json(); // Await the JSON parsing
+    
+            if (response.ok) {
+                setAlert({
+                    visible: true,
+                    type: "success",
+                    message: `Password changed successfully`,
                 });
+            } else {
+                // Access the message property from the parsed response data
+                setAlert({
+                    visible: true,
+                    type: "error",
+                    message: `${response.status}: ${capitalize(responseData.message) || 'Unknown error'}`,
+                });
+            }
+        } catch (error) {
+            setAlert({
+                visible: true,
+                type: "error",
+                message: `Error: ${error.message || 'An unexpected error occurred'}`,
+            });
+        }
     }
 
     return (
