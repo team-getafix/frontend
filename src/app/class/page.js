@@ -23,7 +23,7 @@ export default function ClassPage() {
           }`}
           onClick={() => setActiveTab("stream")}
         >
-          Stream
+          Stream (Coming soon)
         </button>
         <button
           className={`px-4 py-2 rounded-lg font-medium transition ${
