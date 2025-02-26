@@ -12,7 +12,7 @@ export default function SignIn({ setIsSignUp }) {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:4001/auth/login", {
+            const response = await fetch("http://localhost:4000/api/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

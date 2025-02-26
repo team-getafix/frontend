@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { RiMenuLine, RiCloseLargeLine, RiAccountCircleFill, RiHome4Line, RiBook2Line, RiSettings3Line } from "react-icons/ri";
+import { RiMenuLine, RiCloseLargeLine, RiAccountCircleFill, RiHome4Line, RiBook2Line, RiSettings3Line, RiProfileFill } from "react-icons/ri";
 import { isAdmin, isTokenValid } from "@/utils/authUtils";
 import { HiOutlineBookOpen } from "react-icons/hi";
 
@@ -20,6 +20,7 @@ export default function Navbar() {
     //! Hydration error: ...(isAdmin() ? [{ href: "/admin", label: "Admin", icon: RiHome4Line }] : [{ href: "/class", label: "Subjects", icon: HiOutlineBookOpen }]),
     { href: "/class", label: "Subjects", icon: HiOutlineBookOpen },
     { href: "/services", label: "Settings", icon: RiSettings3Line },
+    { href: "/profile", label: "Settings", icon: RiProfileFill }
   ];
 
   useEffect(() => {
