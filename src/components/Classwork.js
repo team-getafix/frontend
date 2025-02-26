@@ -4,13 +4,12 @@ import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomeworkItem from "@/components/HomeworkItem";
 
-export default function Classwork() {
+export default function Classwork(subjectId) {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchAssignments() {
-      const subjectId = 1;
       const token = localStorage.getItem('token');
 
       try {
@@ -30,7 +29,7 @@ export default function Classwork() {
           console.error(response.statusText);
         }
       } catch (e) {
-        console.error(e);
+        console.error(`Error while loading assignments: ${e}`);
         // TODO: alert
       }
 

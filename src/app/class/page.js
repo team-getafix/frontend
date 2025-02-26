@@ -49,7 +49,7 @@ export default function ClassPage() {
           <Stream classId={classId}/>
         )}
         {activeTab === "people" && <PeopleTab />}
-        {activeTab === "classwork" && <Classwork />}
+        {activeTab === "classwork" && <Classwork subjectId={ classId }/>}
       </main>
     </div>
   );
