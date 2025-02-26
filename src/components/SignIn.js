@@ -91,13 +91,6 @@ export default function SignIn({ setIsSignUp }) {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    <div className="flex mt-8 justify-between items-center">
-                        <div>
-                            <input type="checkbox" id="remember" className="accent-orange-500"  />
-                            <label htmlFor="remember" className="ml-2 font-medium text-base">Remember me</label>
-                        </div>
-                        <button type="button" className="font-medium text-base text-orange-800">Forgot password</button>
-                    </div>
                     <div className="mt-8 flex flex-col gap-y-4">
                         <button
                             type="submit"
