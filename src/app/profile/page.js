@@ -23,7 +23,7 @@ export default function ProfileView() {
     };
 
     return (
-        <div className="flex min-h-screen bg-gradient-to-r from-gray-100 to-gray-300">
+        <div className="flex min-h-screen w-full bg-gradient-to-r from-gray-100 to-gray-300">
             {/* Centered Content */}
             <div className="flex flex-1 items-center justify-center">
                 <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-lg text-center">
