@@ -15,7 +15,7 @@ export function isTeacher() {
 function isRole(role) {
     const decodedToken = decodeToken();
 
-    if (decodedToken && decodedToken.role === role && isTokenValid()) {
+    if (decodedToken && decodedToken.role === role && isTokenValid() && typeof window !== 'undefined') {
         return true;
     }
 
@@ -23,6 +23,10 @@ function isRole(role) {
 }
 
 export function isTokenValid() {
+    if (typeof window === 'undefined') {
+        return
+    }
+    
     return !isTokenEmpty() && !isTokenExpired() 
 }
 
@@ -41,7 +45,6 @@ function decodeToken() {
 }
 
 function isTokenEmpty() {
-
     if (!localStorage.getItem('token')) {
         return true;
     }
