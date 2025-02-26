@@ -69,7 +69,7 @@ export default function SignIn({ setIsSignUp }) {
                 <Alert type={customAlert.type} message={customAlert.message} onClose={() => setAlert({ visible: false, type: "", message: "" })}/>
             )}
             <div className="lg:bg-white duration-300 px-10 py-10 rounded-2xl lg:border-2 border-gray-200">
-                <h1 className="text-5xl font-semibold">Welcome Back!</h1>
+                <h1 className="text-5xl font-semibold">Welcome!</h1>
                 <p className="font-medium text-lg text-gray-500 mt-4">Please enter your details.</p>
                 <form onSubmit={handleLogin} className="mt-8">
                     <div>
