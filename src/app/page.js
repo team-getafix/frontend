@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import CourseJoin from "@/components/CourseJoin";
 import CourseCreate from "@/components/CourseCreate";
 import ClassCard from "@/components/ClassCard";
-import { isTokenValid } from '@/utils/authUtils';
+import { isTokenValid, isAdmin } from '@/utils/authUtils';
 import NoClasses from '@/components/NoClasses';
 
 export default function App() {
