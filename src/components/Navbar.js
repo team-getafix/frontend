@@ -44,7 +44,7 @@ export default function Navbar() {
           {isOpen ? <RiCloseLargeLine /> : <RiMenuLine />}
         </button>
         <div className="text-2xl font-bold hover:underline ml-4">
-          <Link href="/">Getafix</Link>
+          <Link href="/">Notate</Link>
         </div>
       </div>
 
