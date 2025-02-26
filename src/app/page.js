@@ -5,8 +5,9 @@ import CourseJoin from "@/components/CourseJoin";
 import CourseCreate from "@/components/CourseCreate";
 import ClassCard from "@/components/ClassCard";
 import { isTokenValid } from '@/utils/authUtils';
+import NoClasses from '@/components/NoClasses';
 
-function App() {
+export default function App() {
   const [isClient, setIsClient] = useState(false);
   const [showCourseJoin, setShowCourseJoin] = useState(false);
   const [showCourseCreate, setShowCourseCreate] = useState(false);
