@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomeworkItem from "@/components/HomeworkItem";
 
 export default function Classwork(subjectId) {

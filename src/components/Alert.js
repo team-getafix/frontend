@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 export function Alert({ type, message, onClose }) {
 
   const alertStyles = {
