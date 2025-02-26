@@ -34,15 +34,23 @@ export function isTokenExpired() {
 }
 
 function decodeToken() {
-    if (!isTokenEmpty()) {
-        const token = localStorage.getItem('token');
-        return jwtDecode(token);
+    try {
+        if (!isTokenEmpty()) {
+            const token = localStorage.getItem('token');
+            return jwtDecode(token);
+        }
+    } catch (error) {
+        console.warn(error);
     }
 }
 
 function isTokenEmpty() {
 
-    if (!localStorage.getItem('token')) {
-        return true;
+    try {
+        if (!localStorage.getItem('token')) {
+            return true;
+        }
+    } catch (error) {
+        console.warn(error);
     }
 }

@@ -16,7 +16,8 @@ export default function Navbar() {
 
   const menuItems = [
     { href: "/", label: "Home", icon: RiHome4Line },
-    ...(isAdmin() ? [{ href: "/admin", label: "Admin", icon: RiHome4Line }] : [{ href: "/class", label: "Subjects", icon: RiHome4Line }]),
+    // ...(isAdmin() ? [{ href: "/admin", label: "Admin", icon: RiHome4Line }] : [{ href: "/class", label: "Subjects", icon: RiHome4Line }]),
+    { href: "/class", label: "Subjects", icon: RiHome4Line },
     { href: "/services", label: "Settings", icon: RiSettings3Line },
   ];
 
