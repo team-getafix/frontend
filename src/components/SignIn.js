@@ -4,6 +4,7 @@ import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { Alert } from "@/components/Alert";
 
+
 export default function SignIn({ setIsSignUp }) {
     const [customAlert, setAlert] = useState({ visible: false, type: "", message: "" });
     const [email, setEmail] = useState("");
@@ -27,10 +28,19 @@ export default function SignIn({ setIsSignUp }) {
                 const decodedToken = jwtDecode(token);
                 if (decodedToken.role === "admin") {
                     console.log("Logged in as admin");
+                    setTimeout(() => {
+                        window.location.href = "/";
+                    });
                 } else if (decodedToken.role === "user") {
                     console.log("Logged in as user");
+                    setTimeout(() => {
+                        window.location.href = "/";
+                    });
                 } else {
-                    console.log("Logged in with unknown role");
+                    console.log("Logged in with  unknown role");
+                    setTimeout(() => {
+                        window.location.href = "/";
+                    });
                 }
                 setAlert({
                     visible: true,
