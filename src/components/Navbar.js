@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -7,7 +8,6 @@ import { isAdmin, isTokenValid } from "@/utils/authUtils";
 import { HiOutlineBookOpen } from "react-icons/hi";
 
 export default function Navbar() {
-  var profileLink = "/login";
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname(); // Get current route
 
@@ -20,11 +20,6 @@ export default function Navbar() {
     //! Hydration error: ...(isAdmin() ? [{ href: "/admin", label: "Admin", icon: RiHome4Line }] : [{ href: "/class", label: "Subjects", icon: HiOutlineBookOpen }]),
     { href: "/services", label: "Settings", icon: RiSettings3Line },
   ];
-
-
-  if (isTokenValid()) {
-    profileLink = "/profile"
-  }
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -51,7 +46,7 @@ export default function Navbar() {
       </div>
 
       <div className="scale-[200%] duration-300 mr-4">
-        <Link href={ profileLink }>
+        <Link href='/login'>
           <RiAccountCircleFill />
         </Link>
       </div>

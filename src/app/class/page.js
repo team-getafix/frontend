@@ -1,12 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from 'next/navigation';
 import Stream from "@/components/Stream";
 import PeopleTab from "@/components/PeopleTab";
 import Classwork from "@/components/Classwork";
 
-export default function ClassPage({ classId, userId, isTeacher }) {
+export default function ClassPage() {
   const [activeTab, setActiveTab] = useState("stream");
+  const searchParams = useSearchParams();
+  const classId = searchParams.get('classId');
+
+  console.log(classId);
 
   return (
     <div className="flex flex-col h-screen w-full">
@@ -41,7 +46,7 @@ export default function ClassPage({ classId, userId, isTeacher }) {
       {/* Main Content */}
       <main className="flex p-6 justify-center overflow-auto">
         {activeTab === "stream" && (
-          <Stream classId={classId} userId={userId} isTeacher={isTeacher} />
+          <Stream classId={classId}/>
         )}
         {activeTab === "people" && <PeopleTab />}
         {activeTab === "classwork" && <Classwork />}
