@@ -30,9 +30,9 @@ async function getUser() {
 
 export default function ProfileView() {
     const [user, setUser] = useState({ 
-        firstName: "John",
-        lastName: "Doe",
-        email: "johndoe@example.com" 
+        firstName: "",
+        lastName: "",
+        email: "" 
     });
 
     useEffect(() => {
