@@ -33,15 +33,28 @@ async function getTeachers() {
 
 export default function NewSubject() {
 
-    useEffect(() => {
-        const teachers = getTeachers()
+    function createSubject(formData) {
+        const token = localStorage.getItem('token');	
+        const name = formData.get('name');
 
-        console.log(teachers)
-    }, []);
+        fetch('http://localhost:4000/api/class/subjects', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                name: name
+            })
+        }).then(response => {
+            console.log(response.status)
+        }).catch(error => {
+            console.log(error)
+        })
+    }
 
     return (
         <div className="flex items-center justify-center w-screen h-screen text-xl" suppressHydrationWarning>
-            <form>
+            <form action={ createSubject }>
                 <div className="mb-4">
                     <label className="font-semibold">
                         Subject name

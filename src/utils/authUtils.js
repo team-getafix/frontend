@@ -22,6 +22,17 @@ function isRole(role) {
     return false;
 }
 
+export function getId() {
+    const decodedToken = decodeToken();
+    console.log(decodedToken);
+    if (decodedToken && isTokenValid() && typeof window !== 'undefined') {
+        console.log(decodedToken);
+        return decodedToken.id;
+    }
+
+    return null;
+}
+
 export function isTokenValid() {
     if (typeof window === 'undefined') {
         return;

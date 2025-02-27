@@ -2,7 +2,43 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { isTeacher } from '@/utils/authUtils';
+import { isTeacher, getId } from '@/utils/authUtils';
+
+async function getSubjectsForTeacher() {
+    const token = localStorage.getItem('token');
+
+    if (!isTeacher()) {
+        return
+    }
+
+    try {
+        const response = await fetch('http://localhost:4000/api/class/subjects', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
+
+        if (response.status === 200) {
+            const rawData = await response.json();
+            const data = {};
+            const id = getId();
+            rawData.map((subject) => {
+                if (id && subject.teacherIds.includes(id)) {
+                    data.push(subject);
+                }
+            });
+
+            return data;
+        } else {
+            console.error(`${response.status}: ${response.statusText}`);
+        }
+    } catch (error) {
+        console.error(error);
+        return null;
+        // TODO: alert
+    }
+}
 
 export default function ClassCard() {
     const [classes, setClasses] = useState([]);
@@ -12,40 +48,10 @@ export default function ClassCard() {
         router.push(`/class?classId=${class_id}`);
     }
 
-    async function fetchSubjectsForTeacher() {
-        const token = localStorage.getItem('token');
-
-        if (!isTeacher()) {
-            return
-        }
-
-        try {
-            const response = await fetch('http://localhost:4000/api/class/subjects', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                },
-            });
-
-            if (response.status === 200) {
-                const rawData = await response.json();
-                const data = {};
-                // rawData.map((subject) => (
-                //     if (subject.)
-                // ));
-
-                setClasses(data);
-            } else {
-                console.error(`${response.status}: ${response.statusText}`);
-            }
-        } catch (error) {
-            console.error(error);
-            // TODO: alert
-        }
-    }
+    getId();
 
     useEffect(() => {
-        fetchClasses();
+        const subjects = getSubjectsForTeacher();
     }, []);
 
     return (
@@ -54,8 +60,7 @@ export default function ClassCard() {
                 <div
                     key={class_.id}
                     className="relative w-80 h-48 rounded-2xl shadow-lg overflow-hidden text-white bg-blue-500 cursor-pointer hover:shadow-lg transition"
-                    onClick={() => handleClassClick(class_.id)}
-                >
+                    onClick={() => handleClassClick(class_.id)}>
                     <div className="p-4 h-2/3">
                         <h2 className="text-xl font-bold">{class_.name}</h2>
                         <p className="text-sm opacity-80">Room: {class_.room}</p>
