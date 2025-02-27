@@ -24,13 +24,16 @@ export default function Navbar() {
       //! Hydration error: ...(isAdmin() ? [{ href: "/admin", label: "Admin", icon: RiHome4Line }] : [{ href: "/class", label: "Subjects", icon: HiOutlineBookOpen }]),
       // { href: "/class", label: "Subjects", icon: HiOutlineBookOpen },
       // { href: "/services", label: "Settings", icon: RiSettings3Line },
-      { href: "/profile", label: "Profile", icon: FaUser }
     ];
 
     if (isAdmin()) {
       baseItems.splice(1, 0, { href: "/admin", label: "Admin", icon: RiSettings3Line });
     } else if (isStudent()) {
       baseItems.splice(1, 0, { href: "/class", label: "Subjects", icon: HiOutlineBookOpen });
+    }
+
+    if (isTokenValid()) {
+      baseItems.splice(3, 0, { href: "/profile", label: "Profile", icon: FaUserCircle });
     }
 
     setMenuItems(baseItems);
