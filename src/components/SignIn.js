@@ -29,17 +29,17 @@ export default function SignIn({ setIsSignUp }) {
                 if (decodedToken.role === "admin") {
                     console.log("Logged in as admin");
                     setTimeout(() => {
-                        window.location.href = "/";
+                        window.location.href = "/admin";
                     });
                 } else if (decodedToken.role === "user") {
                     console.log("Logged in as user");
                     setTimeout(() => {
-                        window.location.href = "/";
+                        window.location.href = "/subjects";
                     });
                 } else {
                     console.log("Logged in with  unknown role");
                     setTimeout(() => {
-                        window.location.href = "/";
+                        window.location.href = "/subjects";
                     });
                 }
                 setAlert({
