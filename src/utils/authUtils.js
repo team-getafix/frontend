@@ -24,9 +24,7 @@ function isRole(role) {
 
 export function getId() {
     const decodedToken = decodeToken();
-    console.log(decodedToken);
     if (decodedToken && isTokenValid() && typeof window !== 'undefined') {
-        console.log(decodedToken);
         return decodedToken.id;
     }
 
