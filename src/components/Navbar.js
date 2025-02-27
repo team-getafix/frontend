@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { FaUser, FaUserCircle } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import Link from "next/link";
-import { RiMenuLine, RiCloseLargeLine, RiAccountCircleFill, RiHome4Line, RiBook2Line, RiSettings3Line } from "react-icons/ri";
-import { isAdmin, isTokenValid } from "@/utils/authUtils";
+import { RiMenuLine, RiCloseLargeLine, RiAccountCircleFill, RiHome4Line, RiAdminLine, RiSettings3Line } from "react-icons/ri";
+import { isAdmin } from "@/utils/authUtils";
 import { HiOutlineBookOpen } from "react-icons/hi";
 
 export default function Navbar() {
@@ -18,11 +18,14 @@ export default function Navbar() {
 
   const menuItems = [
     { href: "/", label: "Home", icon: RiHome4Line },
-    //! Hydration error: ...(isAdmin() ? [{ href: "/admin", label: "Admin", icon: RiHome4Line }] : [{ href: "/class", label: "Subjects", icon: HiOutlineBookOpen }]),
     { href: "/class", label: "Subjects", icon: HiOutlineBookOpen },
-    { href: "/services", label: "Settings", icon: RiSettings3Line },
+    // { href: "/services", label: "Settings", icon: RiSettings3Line },
     { href: "/profile", label: "Profile", icon: FaUser }
   ];
+
+  if (isAdmin()) {
+    menuItems.push({ href: "/admin", label: "Admin", icon: RiAdminLine });
+  }
 
   useEffect(() => {
     const handleClickOutside = (event) => {

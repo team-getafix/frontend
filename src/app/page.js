@@ -35,18 +35,13 @@ export default function App() {
     return;
   }
 
-  // if (isTokenValid() && !isAdmin()) {
-  //   return (
-  //     <ClassCard/>
-  //   )
-  // }
+  if (isTokenValid() && !isAdmin()) {
+    return (
+      <ClassCard/>
+    )
+  }
 
-  if (isTokenValid() && isAdmin()) {
-    if (typeof window !== 'undefined') {
-      window.location.href = '/admin';
-    }
-    return null;
-  } else if (!isTokenValid()) {
+  if (!isTokenValid()) {
     if (typeof window !== 'undefined') {
       window.location.href = '/login';
     }

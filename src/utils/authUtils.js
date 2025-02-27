@@ -24,17 +24,17 @@ function isRole(role) {
 
 export function isTokenValid() {
     if (typeof window === 'undefined') {
-        return
+        return;
     }
     
-    return !isTokenEmpty() && !isTokenExpired() 
+    return !isTokenEmpty() && !isTokenExpired();
 }
 
 export function isTokenExpired() {
     const decodedToken = decodeToken();
     const currentTime = Date.now() / 1000;
 
-    return decodedToken && decodedToken.exp < currentTime
+    return decodedToken && decodedToken.exp < currentTime;
 }
 
 function decodeToken() {
@@ -45,7 +45,8 @@ function decodeToken() {
 }
 
 function isTokenEmpty() {
-    if (!localStorage.getItem('token')) {
+    if (typeof localStorage === 'undefined' || !localStorage.getItem('token')) {
         return true;
     }
+    return false;
 }
