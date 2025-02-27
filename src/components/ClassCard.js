@@ -39,7 +39,7 @@ export default function ClassCard() {
     }, []);
 
     return (
-        <div className="flex flex-wrap gap-4 m-10">
+        <div className="flex flex-wrap max-sm:justify-center gap-4 m-10">
             {classes.map((class_) => (
                 <div
                     key={class_.id}
