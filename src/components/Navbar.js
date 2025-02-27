@@ -33,7 +33,7 @@ export default function Navbar() {
     }
 
     if (isTokenValid()) {
-      baseItems.splice(3, 0, { href: "/profile", label: "Profile", icon: FaUserCircle });
+      baseItems.splice(3, 0, { href: "/profile", label: "Profile", icon: FaUser });
     }
 
     setMenuItems(baseItems);

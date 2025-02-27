@@ -8,7 +8,6 @@ export default function ClassCard() {
     const router = useRouter();
 
     const handleClassClick = (class_id) => {
-        // window.location.href = '/class';
         router.push(`/class?classId=${class_id}`);
     }
 
@@ -40,9 +39,22 @@ export default function ClassCard() {
     }, []);
 
     return (
-        <div>
-            { classes.map((class_) => (
-                <button key={ class_.id } data-id={ class_.id } onClick={ () => handleClassClick(class_.id) }>{ class_.name }</button>
+        <div className="flex flex-wrap gap-4 m-10">
+            {classes.map((class_) => (
+                <div
+                    key={class_.id}
+                    className="relative w-80 h-48 rounded-2xl shadow-lg overflow-hidden text-white bg-blue-500 cursor-pointer hover:shadow-lg transition"
+                    onClick={() => handleClassClick(class_.id)}
+                >
+                    <div className="p-4 h-2/3">
+                        <h2 className="text-xl font-bold">{class_.name}</h2>
+                        <p className="text-sm opacity-80">Room: {class_.room}</p>
+                    </div>
+                    <div className="absolute bottom-0 w-full bg-white text-gray-800 py-2 px-4 flex justify-between items-center">
+                        <p className="text-sm font-semibold">Teacher: {class_.teacherName}</p>
+                        <button className="text-blue-500 hover:underline text-sm">View</button>
+                    </div>
+                </div>
             ))}
         </div>
     )
