@@ -17,6 +17,9 @@ export default function AdminPage() {
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded px-4 py-5">
                     New User
                 </button>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded px-4 py-5">
+                    Delete User
+                </button>
             </div>
         </div>
     )

@@ -4,28 +4,40 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
-import { RiMenuLine, RiCloseLargeLine, RiAccountCircleFill, RiHome4Line, RiAdminLine, RiSettings3Line } from "react-icons/ri";
-import { isAdmin } from "@/utils/authUtils";
+import { RiMenuLine, RiCloseLargeLine, RiAccountCircleFill, RiHome4Line, RiBook2Line, RiSettings3Line } from "react-icons/ri";
+import { isAdmin, isTokenValid, isStudent } from "@/utils/authUtils";
 import { HiOutlineBookOpen } from "react-icons/hi";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname(); // Get current route
+  const [menuItems, setMenuItems] = useState([]);
+
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  const menuItems = [
-    { href: "/", label: "Home", icon: RiHome4Line },
-    { href: "/class", label: "Subjects", icon: HiOutlineBookOpen },
-    // { href: "/services", label: "Settings", icon: RiSettings3Line },
-    { href: "/profile", label: "Profile", icon: FaUser }
-  ];
+  useEffect(() => {
+    const baseItems = [
+      { href: "/", label: "Home", icon: RiHome4Line },
+      //! Hydration error: ...(isAdmin() ? [{ href: "/admin", label: "Admin", icon: RiHome4Line }] : [{ href: "/class", label: "Subjects", icon: HiOutlineBookOpen }]),
+      // { href: "/class", label: "Subjects", icon: HiOutlineBookOpen },
+      // { href: "/services", label: "Settings", icon: RiSettings3Line },
+    ];
 
-  if (isAdmin()) {
-    menuItems.push({ href: "/admin", label: "Admin", icon: RiAdminLine });
-  }
+    if (isAdmin()) {
+      baseItems.splice(1, 0, { href: "/admin", label: "Admin", icon: RiSettings3Line });
+    } else if (isStudent()) {
+      baseItems.splice(1, 0, { href: "/class", label: "Subjects", icon: HiOutlineBookOpen });
+    }
+
+    if (isTokenValid()) {
+      baseItems.splice(3, 0, { href: "/profile", label: "Profile", icon: FaUserCircle });
+    }
+
+    setMenuItems(baseItems);
+  }, [])
 
   useEffect(() => {
     const handleClickOutside = (event) => {
