@@ -59,7 +59,7 @@ return (
                         <HomeworkItem key={homework.id} homework={homework} />
                     ))
                 ) : (
-                    <p className="text-center text-gray-500">Няма домашни.</p>
+                    <p className="text-center text-gray-500">No assignments.</p>
                 )}
             </div>
         </div>

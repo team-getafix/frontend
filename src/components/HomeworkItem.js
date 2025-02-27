@@ -109,7 +109,7 @@ export default function HomeworkItem({ homework }) {
             <h2 className="text-lg font-medium">{homework.title}</h2>
             <p className="text-sm text-gray-500">{homework.dueDate}</p>
             <p className={`text-sm font-semibold ${isSubmitted ? "text-green-600" : "text-red-600"}`}>
-              {isSubmitted ? "Предадено ✅" : "Не е предадено ❌"}
+              {isSubmitted ? "Submited ✅" : "Not submited ❌"}
             </p>
           </div>
         </div>
@@ -117,11 +117,11 @@ export default function HomeworkItem({ homework }) {
 
       {isExpanded && (
         <div className="mt-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
-          <p className="text-gray-700 mb-2">{homework.description || "Няма описание."}</p>
+          <p className="text-gray-700 mb-2">{homework.description || "No description."}</p>
 
           {homework.files && homework.files.length > 0 && (
             <div>
-              <h3 className="text-sm font-semibold">Прикачени файлове:</h3>
+              <h3 className="text-sm font-semibold">Attached files:</h3>
               <ul className="list-disc ml-5">
                 {homework.files.map((file, index) => (
                   <li key={index}>
