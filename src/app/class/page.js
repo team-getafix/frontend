@@ -11,8 +11,6 @@ export default function ClassPage() {
   const searchParams = useSearchParams();
   const classId = searchParams.get('classId');
 
-  console.log(classId);
-
   return (
     <div className="flex flex-col h-screen w-full">
       {/* Top Navigation */}

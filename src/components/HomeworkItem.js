@@ -3,6 +3,31 @@
 import { useState, useEffect } from "react";
 import { FaRegClipboard } from "react-icons/fa";
 
+async function getAssignment(submissionId) {
+  const token = localStorage.getItem('token');
+
+  try {
+    const response = await fetch(`http://localhost:4000/api/submission/assignments/${submissionId}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Basic ${token}`,
+        'accept': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`${response.status} ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    return data;
+
+  } catch (e) {
+    alert(`Error while loading assignments: ${e}`);
+    return null;
+  }
+}
+
 export default function HomeworkItem({ homework }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [file, setFile] = useState(null);
@@ -10,31 +35,15 @@ export default function HomeworkItem({ homework }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [grade, setGrade] = useState(null);
 
-  useEffect(() => {
-    async function fetchSubmission() {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:4003/submissions/mySubmissions", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+  // useEffect(() => {
+  //   const fetchAssignment = async() => {
+  //     const assignmentData = await getAssignment(homework.id);
+  //     console.log(assignmentData);
+  //   }
 
-        if (!response.ok) throw new Error("Failed to fetch submissions");
-
-        const data = await response.json();
-        const userSubmission = data.find((sub) => sub.assignmentId === homework.id);
-        setSubmission(userSubmission || null);
-        setIsSubmitted(!!(userSubmission && userSubmission.filename));
-
-        if (userSubmission && userSubmission.grade !== undefined) {
-          setGrade(userSubmission.grade);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    fetchSubmission();
-  }, [homework.id]);
+  //   console.log(homework.id);
+  //   fetchAssignment();
+  // }, [homework.id]);
 
   async function handleFileUpload(event) {
     event.preventDefault();
@@ -44,23 +53,23 @@ export default function HomeworkItem({ homework }) {
     formData.append("file", file);
     formData.append("assignmentId", homework.id);
 
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:4003/submissions", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-        body: formData,
-      });
+    // try {
+    //   const token = localStorage.getItem("token");
+    //   const response = await fetch("http://localhost:4003/submissions", {
+    //     method: "POST",
+    //     headers: { Authorization: `Bearer ${token}` },
+    //     body: formData,
+    //   });
 
-      if (!response.ok) throw new Error("Failed to upload file");
+    //   if (!response.ok) throw new Error("Failed to upload file");
 
-      alert("File uploaded successfully!");
-      setFile(null);
-      setIsSubmitted(true);
-    } catch (error) {
-      console.error(error);
-      alert("Upload failed");
-    }
+    //   alert("File uploaded successfully!");
+    //   setFile(null);
+    //   setIsSubmitted(true);
+    // } catch (error) {
+    //   console.error(error);
+    //   alert("Upload failed");
+    // }
   }
 
   async function handleDownload() {
