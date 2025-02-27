@@ -2,17 +2,55 @@
 
 import { useState, useEffect } from "react";
 
+async function getUser() {
+    const token = localStorage.getItem('token');
+
+    try {
+        const response = await fetch('http://localhost:4000/api/auth/me', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            'accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`${response.status}: ${response.statusText}`)
+            
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+        // TODO: alert
+        return null;
+    }
+}
+
 export default function ProfileView() {
-    const [user, setUser] = useState({ firstName: "", lastName: "", email: "" });
+    const [user, setUser] = useState({ 
+        firstName: "John",
+        lastName: "Doe",
+        email: "johndoe@example.com" 
+    });
 
     useEffect(() => {
-        // Fetch user data from localStorage or API
-        const storedUser = JSON.parse(localStorage.getItem("user")) || {
-            firstName: "John",
-            lastName: "Doe",
-            email: "johndoe@example.com"
+        const fetchUser = async() => { 
+            const userData = await getUser();
+
+            console.log(userData);
+
+            if (userData) {
+                setUser({
+                    firstName: userData.firstName,
+                    lastName: userData.lastName,
+                    email: userData.email
+                })
+            }
         };
-        setUser(storedUser);
+
+        fetchUser();
     }, []);
 
     const handleSignOut = () => {
