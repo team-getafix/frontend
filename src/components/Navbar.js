@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaUserCircle } from "react-icons/fa";
 import Link from "next/link";
 import { RiMenuLine, RiCloseLargeLine, RiAccountCircleFill, RiHome4Line, RiBook2Line, RiSettings3Line } from "react-icons/ri";
 import { isAdmin, isTokenValid, isStudent } from "@/utils/authUtils";
