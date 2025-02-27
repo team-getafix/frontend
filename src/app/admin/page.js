@@ -42,10 +42,10 @@ export default function AdminPage() {
                 </button>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded px-4 py-5" onClick={() => {
                     setTimeout(() => {
-                        window.location.href = "/admin/users/delete-user";
+                        window.location.href = "/admin/users";
                     });
                 }}>
-                    Delete User
+                    View Users
                 </button>
             </div>
         </div>

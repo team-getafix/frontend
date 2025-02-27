@@ -53,7 +53,7 @@ export default function ClassesView() {
     const [classes, setClasses] = useState([]);
 
     useEffect(() => {
-        const fetchClasses = async() => { 
+        const fetchClasses = async () => { 
             const classData = await getClasses();
 
             console.log(classData);
