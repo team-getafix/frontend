@@ -5,11 +5,16 @@ import { useSearchParams } from 'next/navigation';
 import Stream from "@/components/Stream";
 import PeopleTab from "@/components/PeopleTab";
 import Classwork from "@/components/Classwork";
+import Grades from "@/components/Grades";
+import { isTeacher } from "@/utils/authUtils";
 
 export default function SubjectView() {
     const [activeTab, setActiveTab] = useState("stream");
     const searchParams = useSearchParams();
     const subjectId = searchParams.get('subjectId');
+
+    console.log(isTeacher());
+    console.log(subjectId);
     
     return (
         <div className="flex flex-col h-screen w-full">
@@ -39,6 +44,16 @@ export default function SubjectView() {
             >
               Classwork
             </button>
+            { isTeacher() && (
+            <button
+              className={`px-4 py-2 rounded-lg font-medium transition ${
+                activeTab === "grades" ? "text-orange-500" : "hover:bg-gray-200"
+              }`}
+              onClick={() => setActiveTab("grades")}
+            >
+              Grades
+            </button>
+            )}
           </nav>
     
           {/* Main Content */}
@@ -48,6 +63,7 @@ export default function SubjectView() {
             )}
             {activeTab === "people" && <PeopleTab />}
             {activeTab === "classwork" && <Classwork subjectId={ subjectId }/>}
+            {activeTab === "grades" && <Grades subjectId={ subjectId }/>}
           </main>
         </div>
     );
