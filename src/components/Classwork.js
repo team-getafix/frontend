@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import HomeworkItem from "@/components/HomeworkItem";
+import { isTeacher } from "@/utils/authUtils";
 
 async function getAssignments(subjectId) {
   const token = localStorage.getItem('token');
@@ -49,20 +50,30 @@ export default function Classwork(subjectObj) {
   if (loading) return <p className="text-center text-gray-500">Loading...</p>;
 
 return (
-    <div className="flex items-center justify-center min-h-screen w-full p-6">
-        <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6 flex flex-col ">
-            <h1 className="text-2xl font-semibold mb-4 text-center">Classwork</h1>
-            <button className="text-blue-500 mb-6 text-left">View your work</button>
-            <div className="w-full space-y-6"> 
-                {assignments.length > 0 ? (
-                    assignments.map((homework) => (
-                        <HomeworkItem key={homework.id} homework={homework} />
-                    ))
-                ) : (
-                    <p className="text-center text-gray-500">No assignments.</p>
-                )}
-            </div>
-        </div>
+    <div className="flex flex-col space-y-4">
+
+    <div className="w-full max-w-2xl mx-auto flex justify-start items-start">
+      <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 shadow">
+        Create
+      </button>
     </div>
+
+    {/* Classwork Section */}
+    <div className="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6 flex flex-col">
+      <h1 className="text-2xl font-semibold mb-4 text-center">Classwork</h1>
+      {!isTeacher() && (
+        <button className="text-blue-500 mb-6 text-left">View your work</button>
+      )}
+      <div className="w-full space-y-6">
+        {assignments.length > 0 ? (
+          assignments.map((homework) => (
+            <HomeworkItem key={homework.id} homework={homework} />
+          ))
+        ) : (
+          <p className="text-center text-gray-500">No assignments.</p>
+        )}
+      </div>
+    </div>
+  </div>
 );
 }

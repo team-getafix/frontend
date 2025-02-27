@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { FaRegClipboard } from "react-icons/fa";
+import { isTeacher } from "@/utils/authUtils";
 
 async function getAssignment(submissionId) {
   const token = localStorage.getItem('token');
@@ -108,9 +109,12 @@ export default function HomeworkItem({ homework }) {
           <div>
             <h2 className="text-lg font-medium">{homework.title}</h2>
             <p className="text-sm text-gray-500">{homework.dueDate}</p>
-            <p className={`text-sm font-semibold ${isSubmitted ? "text-green-600" : "text-red-600"}`}>
-              {isSubmitted ? "Submited ✅" : "Not submited ❌"}
-            </p>
+            { !isTeacher() && (
+              <p className={`text-sm font-semibold ${isSubmitted ? "text-green-600" : "text-red-600"}`}>
+                {isSubmitted ? "Submitted ✅" : "Not submitted ❌"}
+              </p>
+            )}
+            
           </div>
         </div>
       </div>
@@ -134,33 +138,38 @@ export default function HomeworkItem({ homework }) {
             </div>
           )}
 
-          {/* Форма за качване на файл */}
-          <div className="mt-4">
-            <h3 className="text-sm font-semibold">Предай домашно</h3>
-            <form onSubmit={handleFileUpload} onClick={(e) => e.stopPropagation()} className="flex flex-col gap-2 mt-2">
-              <input type="file" onChange={(e) => setFile(e.target.files[0])} className="border p-2 rounded" />
-              <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                Качване
-              </button>
-            </form>
-          </div>
+          { !isTeacher && (
+            <>
+              {/* Submit homework section */}
+              <div className="mt-4">
+                <h3 className="text-sm font-semibold">Submit homework</h3>
+                <form onSubmit={handleFileUpload} onClick={(e) => e.stopPropagation()} className="flex flex-col gap-2 mt-2">
+                  <input type="file" onChange={(e) => setFile(e.target.files[0])} className="shadow border p-2 rounded" />
+                  <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                    Upload
+                  </button>
+                </form>
+              </div>
 
-          {submission && submission.filename && (
-            <div className="mt-4">
-              <h3 className="text-sm font-semibold">Изтегли предаденото домашно</h3>
-              <button onClick={handleDownload} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                Изтегли файла ({submission.filename})
-              </button>
-            </div>
+              {/* Download section (if submission exists) */}
+              {submission && submission.filename && (
+                <div className="mt-4">
+                  <h3 className="text-sm font-semibold">Download</h3>
+                  <button onClick={handleDownload} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    Download ({submission.filename})
+                  </button>
+                </div>
+              )}
+
+              {/* Grade section */}
+              <div className="mt-4">
+                <h3 className="text-sm font-semibold">Grade:</h3>
+                <p className={`text-lg font-bold ${grade !== null ? "text-blue-600" : "text-gray-500"}`}>
+                  {grade !== null ? `${grade}/100` : "Ungraded"}
+                </p>
+              </div>
+            </>
           )}
-
-          {/* Поле за оценка */}
-          <div className="mt-4">
-            <h3 className="text-sm font-semibold">Оценка:</h3>
-            <p className={`text-lg font-bold ${grade !== null ? "text-blue-600" : "text-gray-500"}`}>
-              {grade !== null ? `${grade}/100` : "Още няма оценка"}
-            </p>
-          </div>
         </div>
       )}
     </div>
